@@ -97,10 +97,10 @@ University Information:
 
     messages.append({"role": "user", "content": request.query})
 
-completion = client.chat.completions.create(
-    model="openai/gpt-oss-20b",
-    messages=messages
-)
+    completion = client.chat.completions.create(
+        model="openai/gpt-oss-20b",
+        messages=messages
+    )
 
     # Anonymous usage log for admin-facing analytics — only recorded once we
     # actually had context to answer from, so the "no data yet" early-return
