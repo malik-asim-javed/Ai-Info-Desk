@@ -16,7 +16,7 @@ from app.config import settings
 
 router = APIRouter()
 
-client = Groq(api_key=settings.GROQ_API_KEY)
+client = Groq(api_key=settings.GROQ_API_KEY.strip())
 embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # Cap how many prior messages get sent back to the model, so prompts
@@ -97,10 +97,10 @@ University Information:
 
     messages.append({"role": "user", "content": request.query})
 
-    completion = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
-        messages=messages
-    )
+completion = client.chat.completions.create(
+    model="openai/gpt-oss-20b",
+    messages=messages
+)
 
     # Anonymous usage log for admin-facing analytics — only recorded once we
     # actually had context to answer from, so the "no data yet" early-return
